@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import apiClient from "./apiService";
+import apiClient from "../../utils/apiService";
 
-function App() {
+function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,4 +18,4 @@ function App() {
   return <>Hello world</>;
 }
 
-export default App;
+export default Home;

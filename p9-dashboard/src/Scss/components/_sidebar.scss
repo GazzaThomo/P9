@@ -1,0 +1,25 @@
+.sidebar {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  width: 117px;
+
+  &--icons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 100px;
+
+    .icon {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  &--text {
+    font-size: 12px;
+    font-weight: 500;
+    transform: rotate(-90deg);
+    color: white;
+  }
+}

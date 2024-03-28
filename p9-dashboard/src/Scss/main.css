@@ -1,0 +1,63 @@
+body {
+  max-width: 1440px;
+  margin: auto;
+}
+
+* {
+  font-family: Roboto, Arial, sans-serif;
+}
+
+.main-body-container {
+  display: flex;
+}
+
+.navbar {
+  height: 91px;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar--logo {
+  width: 178px;
+  height: 61px;
+}
+.navbarp {
+  margin: 0;
+}
+.navbar--links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 100px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.navbarlink:visited {
+  color: white;
+}
+
+.sidebar {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  width: 117px;
+}
+.sidebar--icons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 100px;
+}
+.sidebar--icons .icon {
+  width: 64px;
+  height: 64px;
+}
+.sidebar--text {
+  font-size: 12px;
+  font-weight: 500;
+  transform: rotate(-90deg);
+  color: white;
+}/*# sourceMappingURL=main.css.map */
