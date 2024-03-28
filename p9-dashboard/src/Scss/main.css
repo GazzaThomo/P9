@@ -1,3 +1,9 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   max-width: 1440px;
   margin: auto;
@@ -43,7 +49,10 @@ body {
   background-color: black;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 117px;
+  height: calc(100vh - 91px);
+  position: fixed;
 }
 .sidebar--icons {
   display: flex;
@@ -60,4 +69,5 @@ body {
   font-weight: 500;
   transform: rotate(-90deg);
   color: white;
+  margin: 0 0 0 100px;
 }/*# sourceMappingURL=main.css.map */
