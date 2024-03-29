@@ -8,6 +8,7 @@
   &--logo {
     width: 178px;
     height: 61px;
+    margin-left: 29px;
   }
 
   &p {
@@ -16,10 +17,9 @@
 
   &--links {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    margin: 0 100px;
     font-size: 24px;
     font-weight: 500;
   }

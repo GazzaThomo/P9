@@ -10,7 +10,9 @@
   &--icons {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    align-items: center;
+    gap: 20px;
+    margin-top: 256px;
     margin-bottom: 100px;
 
     .icon {
@@ -22,8 +24,13 @@
   &--text {
     font-size: 12px;
     font-weight: 500;
-    transform: rotate(-90deg);
     color: white;
-    margin: 0 0 0 100px;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    position: absolute;
+    left: 50%;
+    bottom: 59px;
+    white-space: nowrap; /* prevent text wrapping */
+    translate: -50% 0; /* center the text */
   }
 }
