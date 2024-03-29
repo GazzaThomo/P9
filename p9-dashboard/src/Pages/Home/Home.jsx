@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import apiClient from "../../utils/apiService";
+import apiClient from "../../mockApi/mockApiService.js";
 
-function Home() {
+function Home({ id }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get("/user/12"); // Replace '/data' with the appropriate endpoint
+        const response = await apiClient.get("/user/" + id);
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -13,7 +13,7 @@ function Home() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return <>Hello world</>;
 }
