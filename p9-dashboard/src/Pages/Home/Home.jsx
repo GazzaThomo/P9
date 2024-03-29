@@ -2,19 +2,14 @@ import React, { useEffect } from "react";
 import useUserMainData from "../../hooks/mainData.js";
 
 function Home({ id }) {
-  const mainData = useUserMainData(id); // Assuming the hook is correctly fetching data
+  const mainData = useUserMainData(id);
 
-  // Use useEffect for logging if you want to see the data as soon as it's fetched
+  //useeffect if you want to log when data is loaded, don't forget the mainData in square brackets
   useEffect(() => {
     console.log(mainData);
   }, [mainData]);
 
-  // If you want to conditionally render the data or check if it exists before rendering
-  return (
-    <div>
-      {mainData ? <p>Data loaded, check console</p> : <p>Loading data...</p>}
-    </div>
-  );
+  return <div>Hello world</div>;
 }
 
 export default Home;
