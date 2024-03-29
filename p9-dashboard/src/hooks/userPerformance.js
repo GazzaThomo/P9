@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import apiClient from "./apiClient";
+import apiClient from "../../mockApi/apiClient.js";
 
 function useUserPerformance(userId) {
   const [userPerformance, setUserPerformance] = useState(null);
