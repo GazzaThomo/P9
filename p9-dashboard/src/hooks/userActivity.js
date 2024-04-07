@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import apiClient from "../../mockApi/apiClient.js";
+import apiClient from "../mockApi/mockApiService.js";
 
 function useUserActivity(userId) {
   const [userActivity, setUserActivity] = useState(null);

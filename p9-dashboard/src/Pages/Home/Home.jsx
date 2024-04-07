@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import useUserMainData from "../../hooks/mainData.js";
+import UserActivityChart from "../../Components/DailyActivity/index.jsx";
 
 function Home({ id }) {
   const mainData = useUserMainData(id);
@@ -9,7 +10,11 @@ function Home({ id }) {
     console.log(mainData);
   }, [mainData]);
 
-  return <div>Hello world</div>;
+  return (
+    <>
+      <UserActivityChart id={id} />
+    </>
+  );
 }
 
 export default Home;

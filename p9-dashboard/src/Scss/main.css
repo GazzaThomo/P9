@@ -77,4 +77,14 @@ body {
   bottom: 59px;
   white-space: nowrap; /* prevent text wrapping */
   translate: -50% 0; /* center the text */
+}
+
+.recharts-wrapper .recharts-surface:hover {
+  background-color: lightgrey;
+}
+
+.custom-tooltip {
+  background: white;
+  padding: 10px;
+  border: 1px solid #ccc;
 }/*# sourceMappingURL=main.css.map */
