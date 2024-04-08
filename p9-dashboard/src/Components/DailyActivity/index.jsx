@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import useUserActivity from "../../hooks/userActivity.js";
 
+//for tooltip, needs changing css side
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const { kilogram, calories } = payload[0].payload;
@@ -33,6 +34,8 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
+//need to seperate the css from this, it's horrible, but easy access at least
+//used to create the legend seperate from th chart so it aligns correctly with title
 const LegendComponent = () => (
   <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
     <div style={{ display: "flex", alignItems: "center" }}>
@@ -62,15 +65,20 @@ const LegendComponent = () => (
   </div>
 );
 
+//this is the main component that will render on the page
 const UserActivityChart = ({ userId }) => {
+  //get the data from API call
   const userActivityResponse = useUserActivity(userId);
 
+  //check the data is there, if not show loading ==> can put inside a useEffect later
   if (!userActivityResponse || !userActivityResponse.data) {
     return <div>Loading...</div>;
   }
 
+  //deconstruct the data
   const { sessions } = userActivityResponse.data;
 
+  //return the html
   return (
     <div className="barChart">
       <div
