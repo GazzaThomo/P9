@@ -12,7 +12,7 @@ function Home({ id }) {
 
   return (
     <>
-      <UserActivityChart id={id} />
+      <UserActivityChart userId={id} />
     </>
   );
 }

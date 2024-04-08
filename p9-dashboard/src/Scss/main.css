@@ -87,4 +87,9 @@ body {
   background: white;
   padding: 10px;
   border: 1px solid #ccc;
+}
+
+.barChart {
+  width: 100%;
+  margin-left: 117px;
 }/*# sourceMappingURL=main.css.map */
