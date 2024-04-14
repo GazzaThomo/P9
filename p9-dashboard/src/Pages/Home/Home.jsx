@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useUserMainData from "../../hooks/mainData.js";
 import UserActivityChart from "../../Components/DailyActivity/index.jsx";
+import UserAverageSessionsChart from "../../Components/averageSession/index.jsx";
 
 function Home({ id }) {
   const mainData = useUserMainData(id);
@@ -13,6 +14,7 @@ function Home({ id }) {
   return (
     <>
       <UserActivityChart userId={id} />
+      <UserAverageSessionsChart userId={12} />
     </>
   );
 }
