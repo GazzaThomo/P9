@@ -4,6 +4,7 @@ import UserActivityChart from "../../Components/DailyActivity/index.jsx";
 import UserAverageSessionsChart from "../../Components/averageSession/index.jsx";
 import UserPerformanceChart from "../../Components/Intensity/index.jsx";
 import UserScore from "../../Components/Score/index.jsx";
+import Nutrients from "../../Components/Nutrients/index.jsx";
 
 function Home({ id }) {
   // const mainData = useUserMainData(id);
@@ -21,6 +22,7 @@ function Home({ id }) {
         <UserAverageSessionsChart userId={id} />
         <UserPerformanceChart userId={id} />
         <UserScore userId={id} />
+        <Nutrients userId={id} />
       </div>
     </>
   );
