@@ -80,27 +80,12 @@ const UserActivityChart = ({ userId }) => {
   //return the html
   return (
     <div className="barChart">
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          margin: "0 20px",
-        }}
-      >
+      <div className="title">
         <h2>Activité quotidienne</h2>
         <LegendComponent />
       </div>
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart
-          data={sessions}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
+      <ResponsiveContainer className="responsive-container-bar-chart">
+        <BarChart data={sessions} className="chart">
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="day" />
           <YAxis />

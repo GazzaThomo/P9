@@ -14,10 +14,10 @@ const Nutrients = ({ userId }) => {
   };
 
   const titleMap = {
-    calorieCount: "calories",
-    proteinCount: "proteines",
-    carbohydrateCount: "glucides",
-    lipidCount: "lipides",
+    calorieCount: "Calories",
+    proteinCount: "Proteines",
+    carbohydrateCount: "Glucides",
+    lipidCount: "Lipides",
   };
 
   if (!userMainData) {
@@ -27,12 +27,16 @@ const Nutrients = ({ userId }) => {
   const keyData = userMainData.data.keyData;
 
   return (
-    <div className="nutrient-container">
+    <div className="nutrients">
       {Object.entries(keyData).map(([key, value]) => (
-        <div key={key}>
-          <img src={imageMap[key]} alt={key} />
-          <p>{`${value}${key === "calorieCount" ? "kCal" : "g"}`}</p>
-          <p>{titleMap[key]}</p>
+        <div key={key} className="nutrients-container">
+          <img src={imageMap[key]} alt={key} className="nutrients-image" />
+          <div className="nutrients-text">
+            <p className="nutrients-text-data">{`${value}${
+              key === "calorieCount" ? "kCal" : "g"
+            }`}</p>
+            <p className="nutrients-text-type">{titleMap[key]}</p>
+          </div>
         </div>
       ))}
     </div>

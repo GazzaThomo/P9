@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Header />
     <div className="main-body-container">
       <Sidebar />
-      <Home id={18} />
+      <Home id={12} />
     </div>
   </React.StrictMode>
 );

@@ -7,21 +7,18 @@ import UserScore from "../../Components/Score/index.jsx";
 import Nutrients from "../../Components/Nutrients/index.jsx";
 
 function Home({ id }) {
-  // const mainData = useUserMainData(id);
-
-  //useeffect if you want to log when data is loaded, don't forget the mainData in square brackets
-  // useEffect(() => {
-  //   console.log(mainData);
-  // }, [mainData]);
-
   return (
     <>
-      <div>
+      <div className="home-container">
         {" "}
-        <UserActivityChart userId={id} />
-        <UserAverageSessionsChart userId={id} />
-        <UserPerformanceChart userId={id} />
-        <UserScore userId={id} />
+        <div className="charts-container">
+          <UserActivityChart userId={id} />
+          <div className="small-charts-container">
+            <UserAverageSessionsChart userId={id} />
+            <UserPerformanceChart userId={id} />
+            <UserScore userId={id} />
+          </div>
+        </div>
         <Nutrients userId={id} />
       </div>
     </>

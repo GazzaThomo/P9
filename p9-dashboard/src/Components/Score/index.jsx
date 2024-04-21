@@ -29,7 +29,7 @@ const UserScore = ({ userId }) => {
   ];
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer>
       <RadialBarChart
         cx="50%"
         cy="50%"

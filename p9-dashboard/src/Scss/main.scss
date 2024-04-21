@@ -1,4 +1,6 @@
 @import "globals/layout";
 
 @import "components/header", "components/sidebar",
-  "components/charts/userActivity", "components/nutrients";
+  "components/charts/dailyActivity", "components/nutrients",
+  "components/charts/averageSession", "components/charts/intensity",
+  "components/charts/score", "components/home";

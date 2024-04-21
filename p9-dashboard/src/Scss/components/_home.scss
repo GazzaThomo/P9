@@ -1,0 +1,21 @@
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  max-width: calc(100% - 117px);
+  margin: 0 90px 0 109px;
+  gap: 32px;
+}
+
+.charts-container {
+  width: 100%;
+}
+
+.small-charts-container {
+  display: flex;
+  max-height: 263px;
+  height: 100%;
+  justify-content: space-between;
+  gap: 10px;
+}

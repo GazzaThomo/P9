@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html,
 body {
   height: 100%;
@@ -80,21 +81,121 @@ body {
   translate: -50% 0; /* center the text */
 }
 
-.recharts-wrapper .recharts-surface:hover {
-  background-color: lightgrey;
-}
-
 .custom-tooltip {
   background: white;
   padding: 10px;
   border: 1px solid #ccc;
 }
 
-.barChart {
+.responsive-container-bar-chart {
+  max-height: 320px;
+  height: 100%;
   width: 100%;
-  margin-left: 117px;
 }
 
-.nutrient-container {
-  margin-left: 200px;
+.barChart {
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+}
+.barChart .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+}
+.barChart .chart {
+  margin: 20px 30px 20px 5px;
+}
+
+.nutrients {
+  max-width: 250px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nutrients p {
+  margin: 0;
+}
+.nutrients-container {
+  display: flex;
+  height: 124px;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+  align-items: center;
+  gap: 24px;
+}
+.nutrients-image {
+  width: 60px;
+  height: 60px;
+  padding-left: 32px;
+}
+.nutrients-text-data {
+  color: #282d30;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 120% */
+}
+.nutrients-text-type {
+  color: #74798c;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+}
+
+.lineChart {
+  background-color: red;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.lineChart::before {
+  content: "Durée moyenne des sessions";
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  opacity: 0.5;
+  max-width: 150px;
+  color: #fff;
+}
+.lineChart .responsive-container {
+  width: 100%;
+  max-height: calc(100% - 50px);
+  margin-top: 50px;
+}
+.lineChart .line {
+  opacity: 0.5;
+}
+.lineChart .recharts-cartesian-axis-tick text {
+  fill: #fff;
+  opacity: 0.5;
+}
+
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  max-width: calc(100% - 117px);
+  margin: 0 90px 0 109px;
+  gap: 32px;
+}
+
+.charts-container {
+  width: 100%;
+}
+
+.small-charts-container {
+  display: flex;
+  max-height: 263px;
+  height: 100%;
+  justify-content: space-between;
+  gap: 10px;
 }/*# sourceMappingURL=main.css.map */
