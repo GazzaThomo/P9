@@ -1,4 +1,3 @@
-import { PureComponent } from "react";
 import {
   RadialBarChart,
   RadialBar,

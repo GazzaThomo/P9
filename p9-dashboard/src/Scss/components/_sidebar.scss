@@ -4,8 +4,10 @@
   flex-direction: column;
   justify-content: space-between;
   width: 117px;
-  height: calc(100vh - 91px);
-  position: fixed;
+  height: 100vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 
   &--icons {
     display: flex;

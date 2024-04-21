@@ -12,6 +12,7 @@ const Nutrients = ({ userId }) => {
     carbohydrateCount: carbsIcon,
     lipidCount: fatIcon,
   };
+
   const titleMap = {
     calorieCount: "calories",
     proteinCount: "proteines",
@@ -22,7 +23,9 @@ const Nutrients = ({ userId }) => {
   if (!userMainData) {
     return <div>Loading...</div>;
   }
+
   const keyData = userMainData.data.keyData;
+
   return (
     <div className="nutrient-container">
       {Object.entries(keyData).map(([key, value]) => (
