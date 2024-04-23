@@ -18,28 +18,45 @@ const UserPerformanceChart = ({ userId }) => {
     return <div>Loading...</div>;
   }
 
+  const wordMap = {
+    6: "Intensité",
+    1: "Cardio",
+    5: "Vitesse",
+    4: "Force",
+    3: "Endurance",
+    2: "Energie",
+  };
+
   const userData = userPerformance.data;
 
   const transformedData = userData.data.map((item) => ({
     ...item,
-    kind: userData.kind[item.kind.toString()],
+    kind: wordMap[item.kind.toString()],
   }));
 
+  const order = [
+    "Intensité",
+    "Vitesse",
+    "Force",
+    "Endurance",
+    "Energie",
+    "Cardio",
+  ];
+  transformedData.sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind));
+
+  console.log(transformedData);
+
   return (
-    <ResponsiveContainer>
-      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={transformedData}>
-        <PolarGrid />
-        <PolarAngleAxis dataKey="kind" />
-        <PolarRadiusAxis />
-        <Radar
-          name="user"
-          dataKey="value"
-          stroke="#000"
-          fill="#f0f0f0"
-          fillOpacity={0.6}
-        />
-      </RadarChart>
-    </ResponsiveContainer>
+    <div className="radialChart">
+      {" "}
+      <ResponsiveContainer className="responsive-container">
+        <RadarChart cx="50%" cy="50%" outerRadius="70%" data={transformedData}>
+          <PolarGrid radialLines={false} />
+          <PolarAngleAxis dataKey="kind" />
+          <Radar name="user" dataKey="value" fill="#ff0101" fillOpacity={0.7} />
+        </RadarChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

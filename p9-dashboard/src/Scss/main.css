@@ -81,22 +81,20 @@ body {
   translate: -50% 0; /* center the text */
 }
 
-.custom-tooltip {
-  background: white;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-.responsive-container-bar-chart {
-  max-height: 320px;
-  height: 100%;
-  width: 100%;
-}
-
 .barChart {
   background-color: #fbfbfb;
   border-radius: 5px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+  height: 100%; /* Ensure it's appropriately set */
+  width: 100%;
+}
+.barChart .custom-tooltip {
+  background: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.barChart .responsive-container-bar-chart {
+  max-height: 320px;
 }
 .barChart .title {
   display: flex;
@@ -178,6 +176,25 @@ body {
   opacity: 0.5;
 }
 
+.radialChart {
+  width: 100%;
+  background-color: #282d30;
+}
+.radialChart .responsive-container {
+  width: 80%;
+}
+.radialChart .responsive-container .radar-chart-container {
+  background-color: #282d30;
+  padding: 20px;
+}
+.radialChart .responsive-container .radar-chart-container .recharts-wrapper {
+  font-size: 12px;
+  font-weight: 500;
+}
+.radialChart .responsive-container .radar-chart-container .recharts-wrapper .recharts-polar-angle-axis .recharts-polar-angle-axis-tick {
+  word-wrap: break-word;
+}
+
 .home-container {
   display: flex;
   justify-content: space-between;
@@ -190,6 +207,7 @@ body {
 
 .charts-container {
   width: 100%;
+  height: 100%;
 }
 
 .small-charts-container {

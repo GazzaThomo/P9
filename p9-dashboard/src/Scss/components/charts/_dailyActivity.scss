@@ -1,19 +1,19 @@
-.custom-tooltip {
-  background: white;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-.responsive-container-bar-chart {
-  max-height: 320px;
-  height: 100%;
-  width: 100%;
-}
-
 .barChart {
   background-color: #fbfbfb;
   border-radius: 5px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+  height: 100%; /* Ensure it's appropriately set */
+  width: 100%;
+
+  .custom-tooltip {
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .responsive-container-bar-chart {
+    max-height: 320px;
+  }
 
   .title {
     display: flex;

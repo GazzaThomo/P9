@@ -76,6 +76,7 @@ const UserActivityChart = ({ userId }) => {
 
   //deconstruct the data
   const { sessions } = userActivityResponse.data;
+  console.log(sessions);
 
   //return the html
   return (

@@ -1,0 +1,24 @@
+.radialChart {
+  width: 100%;
+  background-color: #282d30;
+  // padding: 5px;
+
+  .responsive-container {
+    width: 80%;
+
+    .radar-chart-container {
+      background-color: #282d30; // Dark grey background
+      padding: 20px;
+
+      .recharts-wrapper {
+        font-size: 12px;
+        font-weight: 500;
+        .recharts-polar-angle-axis {
+          .recharts-polar-angle-axis-tick {
+            word-wrap: break-word;
+          }
+        }
+      }
+    }
+  }
+}
