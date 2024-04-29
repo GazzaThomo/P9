@@ -10,6 +10,7 @@ import {
   Text,
 } from "recharts";
 import useUserActivity from "../../hooks/userActivity.js";
+import { USER_ACTIVITY } from "../../mockApi/mockData.js";
 
 //for tooltip, needs changing css side
 const CustomTooltip = ({ active, payload }) => {
@@ -65,18 +66,23 @@ const LegendComponent = () => (
 );
 
 //this is the main component that will render on the page
-const UserActivityChart = ({ userId }) => {
-  //get the data from API call
-  const userActivityResponse = useUserActivity(userId);
+const UserActivityChart = ({ userId, isMockData }) => {
+  let sessions;
+  if (isMockData) {
+    const filteredData = USER_ACTIVITY.filter(
+      (item) => item.userId === userId
+    )[0];
+    sessions = filteredData.sessions;
+  } else {
+    const userActivityResponse = useUserActivity(userId);
 
-  //check the data is there, if not show loading ==> can put inside a useEffect later
-  if (!userActivityResponse || !userActivityResponse.data) {
-    return <div>Loading...</div>;
+    //check the data is there, if not show loading ==> can put inside a useEffect later
+    if (!userActivityResponse || !userActivityResponse.data) {
+      return <div>Loading...</div>;
+    }
+    //deconstruct the data
+    sessions = userActivityResponse.data.sessions;
   }
-
-  //deconstruct the data
-  const { sessions } = userActivityResponse.data;
-  console.log(sessions);
 
   //return the html
   return (

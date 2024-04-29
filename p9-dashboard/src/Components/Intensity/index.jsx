@@ -12,7 +12,6 @@ import {
 
 const UserPerformanceChart = ({ userId }) => {
   const userPerformance = useUserPerformence(userId);
-  console.log(userPerformance);
 
   if (!userPerformance) {
     return <div>Loading...</div>;
@@ -44,7 +43,7 @@ const UserPerformanceChart = ({ userId }) => {
   ];
   transformedData.sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind));
 
-  console.log(transformedData);
+  // console.log(transformedData);
 
   return (
     <div className="radialChart">
