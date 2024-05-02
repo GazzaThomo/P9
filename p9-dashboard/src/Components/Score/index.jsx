@@ -6,18 +6,26 @@ import {
   PolarAngleAxis,
 } from "recharts";
 import useUserMainData from "../../hooks/mainData.js";
+import { USER_MAIN_DATA } from "../../mockApi/mockData.js";
 
-const UserScore = ({ userId }) => {
-  //get data from hook
-  const userMainData = useUserMainData(userId);
+const UserScore = ({ userId, isMockData }) => {
+  let userMainData;
+  if (isMockData) {
+    userMainData = USER_MAIN_DATA.filter((item) => item.id === userId)[0];
+  } else {
+    //get data from hook
+    userMainData = useUserMainData(userId);
 
-  //needs raplacing with usEffect at some point
-  if (!userMainData) {
-    return <div>Loading...</div>;
+    //needs raplacing with usEffect at some point
+    if (!userMainData) {
+      return <div>Loading...</div>;
+    }
+
+    userMainData = userMainData.data;
   }
 
   // need nullish here because there are 2 keys in the data, score and todayScore ???
-  const score = userMainData.data.todayScore ?? userMainData.data.score;
+  const score = userMainData.todayScore ?? userMainData.score;
 
   //format data for the chart
   const scoreData = [

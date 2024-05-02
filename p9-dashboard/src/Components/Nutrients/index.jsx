@@ -3,9 +3,23 @@ import caloriesIcon from "../../assets/calories-icon.png";
 import carbsIcon from "../../assets/carbs-icon.png";
 import fatIcon from "../../assets/fat-icon.png";
 import proteinIcon from "../../assets/protein-icon.png";
+import { USER_MAIN_DATA } from "../../mockApi/mockData";
 
-const Nutrients = ({ userId }) => {
-  const userMainData = useUserMainData(userId);
+const Nutrients = ({ userId, isMockData }) => {
+  console.log(USER_MAIN_DATA);
+  let keyData;
+
+  if (isMockData) {
+    let filteredData = USER_MAIN_DATA.filter((item) => item.id === userId)[0];
+    keyData = filteredData.keyData;
+  } else {
+    const userMainData = useUserMainData(userId);
+    if (!userMainData) {
+      return <div>Loading...</div>;
+    }
+    keyData = userMainData.data.keyData;
+  }
+
   const imageMap = {
     calorieCount: caloriesIcon,
     proteinCount: proteinIcon,
@@ -20,11 +34,7 @@ const Nutrients = ({ userId }) => {
     lipidCount: "Lipides",
   };
 
-  if (!userMainData) {
-    return <div>Loading...</div>;
-  }
-
-  const keyData = userMainData.data.keyData;
+  // const keyData = userMainData.data.keyData;
 
   return (
     <div className="nutrients">

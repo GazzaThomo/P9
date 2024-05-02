@@ -5,7 +5,7 @@ import UserPerformanceChart from "../../Components/Intensity/index.jsx";
 import UserScore from "../../Components/Score/index.jsx";
 import Nutrients from "../../Components/Nutrients/index.jsx";
 
-const isMockData = false;
+const isMockData = true;
 
 function Home({ id }) {
   return (
@@ -15,12 +15,12 @@ function Home({ id }) {
         <div className="charts-container">
           <UserActivityChart userId={id} isMockData={isMockData} />
           <div className="small-charts-container">
-            <UserAverageSessionsChart userId={id} />
-            <UserPerformanceChart userId={id} />
-            <UserScore userId={id} />
+            <UserAverageSessionsChart userId={id} isMockData={isMockData} />
+            <UserPerformanceChart userId={id} isMockData={isMockData} />
+            <UserScore userId={id} isMockData={isMockData} />
           </div>
         </div>
-        <Nutrients userId={id} />
+        <Nutrients userId={id} isMockData={isMockData} />
       </div>
     </>
   );

@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import useUserAverageSessions from "../../hooks/averageSessions.js"; // Path to your custom hook
+import { USER_AVERAGE_SESSIONS } from "../../mockApi/mockData.js";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -33,14 +34,21 @@ const CustomTooltip = ({ active, payload }) => {
 
 const daysInFrench = ["L", "M", "M", "J", "V", "S", "D"];
 
-const UserAverageSessionsChart = ({ userId }) => {
-  const userAverageSessions = useUserAverageSessions(userId);
+const UserAverageSessionsChart = ({ userId, isMockData }) => {
+  let sessions;
+  if (isMockData) {
+    const filteredData = USER_AVERAGE_SESSIONS.filter(
+      (item) => item.userId === userId
+    )[0];
+    sessions = filteredData.sessions;
+  } else {
+    const userAverageSessions = useUserAverageSessions(userId);
 
-  if (!userAverageSessions) {
-    return <div>Loading...</div>;
+    if (!userAverageSessions) {
+      return <div>Loading...</div>;
+    }
+    sessions = userAverageSessions.data.sessions;
   }
-
-  const { sessions } = userAverageSessions.data;
 
   return (
     <div className="lineChart">

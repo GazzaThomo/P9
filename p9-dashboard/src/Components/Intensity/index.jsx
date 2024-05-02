@@ -9,12 +9,18 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
 } from "recharts";
+import { USER_PERFORMANCE } from "../../mockApi/mockData.js";
 
-const UserPerformanceChart = ({ userId }) => {
-  const userPerformance = useUserPerformence(userId);
-
-  if (!userPerformance) {
-    return <div>Loading...</div>;
+const UserPerformanceChart = ({ userId, isMockData }) => {
+  let userData;
+  if (isMockData) {
+    userData = USER_PERFORMANCE.filter((item) => item.userId === userId)[0];
+  } else {
+    const userPerformanceResponse = useUserPerformence(userId);
+    if (!userPerformanceResponse) {
+      return <div>Loading...</div>;
+    }
+    userData = userPerformanceResponse.data;
   }
 
   const wordMap = {
@@ -25,8 +31,6 @@ const UserPerformanceChart = ({ userId }) => {
     3: "Endurance",
     2: "Energie",
   };
-
-  const userData = userPerformance.data;
 
   const transformedData = userData.data.map((item) => ({
     ...item,
