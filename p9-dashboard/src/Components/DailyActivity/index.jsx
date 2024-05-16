@@ -84,6 +84,11 @@ const UserActivityChart = ({ userId, isMockData }) => {
     sessions = userActivityResponse.data.sessions;
   }
 
+  const minKilogram = Math.min(...sessions.map((session) => session.kilogram));
+  const maxKilogram = Math.max(...sessions.map((session) => session.kilogram));
+
+  console.log(sessions);
+
   //return the html
   return (
     <div className="barChart">
@@ -93,12 +98,45 @@ const UserActivityChart = ({ userId, isMockData }) => {
       </div>
       <ResponsiveContainer className="responsive-container-bar-chart">
         <BarChart data={sessions} className="chart">
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <YAxis />
-          <Tooltip content={<CustomTooltip />} />
-          <Bar dataKey="kilogram" fill="#282D30" name="Kilogram" barSize={10} />
-          <Bar dataKey="calories" fill="#E60000" name="Calories" barSize={10} />
+          <CartesianGrid
+            strokeDasharray="0"
+            horizontal={true}
+            vertical={false}
+          />
+          <XAxis dataKey="day" tickLine={false} axisLine={false} />
+          <YAxis
+            yAxisId="right"
+            dataKey="kilogram"
+            orientation="right"
+            tickLine={false}
+            axisLine={false}
+            domain={[minKilogram - 1, maxKilogram + 1]}
+          />
+          <YAxis
+            yAxisId="left"
+            dataKey="calories"
+            orientation="left"
+            tickLine={false}
+            axisLine={false}
+            hide={true}
+          />
+          <Tooltip content={<CustomTooltip />} offset={40} />
+          <Bar
+            yAxisId="right"
+            dataKey="kilogram"
+            fill="#282D30"
+            name="Kilogram"
+            barSize={10}
+            radius={[10, 10, 0, 0]}
+          />
+          <Bar
+            yAxisId="left"
+            dataKey="calories"
+            fill="#E60000"
+            name="Calories"
+            barSize={10}
+            radius={[10, 10, 0, 0]}
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>

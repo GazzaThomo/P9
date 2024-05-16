@@ -19,9 +19,8 @@ const CustomTooltip = ({ active, payload }) => {
       <div
         style={{
           backgroundColor: "#fff",
-          color: "#ff0000",
+          color: "black",
           padding: "5px",
-          borderRadius: "5px",
         }}
       >
         <p>{`${sessionLength} min`}</p>

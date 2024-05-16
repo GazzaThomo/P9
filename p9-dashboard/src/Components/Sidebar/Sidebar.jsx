@@ -1,3 +1,4 @@
+import React from "react";
 import cycle from "../../assets/icon-cycle.png";
 import meditate from "../../assets/icon-meditate.png";
 import swim from "../../assets/icon-swim.png";

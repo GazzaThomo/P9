@@ -5,9 +5,9 @@
   justify-content: space-between;
   width: 117px;
   height: 100vh;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
+  overflow: hidden; /* Ensure content doesn't overflow */
 
   &--icons {
     display: flex;
@@ -15,7 +15,6 @@
     align-items: center;
     gap: 20px;
     margin-top: 256px;
-    margin-bottom: 100px;
 
     .icon {
       width: 64px;
@@ -31,7 +30,7 @@
     transform-origin: center;
     position: absolute;
     left: 50%;
-    bottom: 59px;
+    bottom: 10px; /* Adjust this value as needed */
     white-space: nowrap; /* prevent text wrapping */
     translate: -50% 0; /* center the text */
   }
