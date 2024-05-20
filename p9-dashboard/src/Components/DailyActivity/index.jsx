@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -67,27 +68,45 @@ const LegendComponent = () => (
 
 //this is the main component that will render on the page
 const UserActivityChart = ({ userId, isMockData }) => {
-  let sessions;
-  if (isMockData) {
-    const filteredData = USER_ACTIVITY.filter(
-      (item) => item.userId === userId
-    )[0];
-    sessions = filteredData.sessions;
-  } else {
-    const userActivityResponse = useUserActivity(userId);
+  const [sessions, setSessions] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    //check the data is there, if not show loading ==> can put inside a useEffect later
-    if (!userActivityResponse || !userActivityResponse.data) {
-      return <div>Loading...</div>;
-    }
-    //deconstruct the data
-    sessions = userActivityResponse.data.sessions;
+  useEffect(() => {
+    //define an asynchronous function to fetch the data
+    const fetchData = async () => {
+      //check if we're using mock data
+      if (isMockData) {
+        //filter the mock data to find the sessions for the given userId
+        const filteredData = USER_ACTIVITY.filter(
+          (item) => item.userId === userId
+        )[0];
+        //set the sessions state with the filtered data
+        setSessions(filteredData.sessions);
+      } else {
+        //if not using mock data, fetch data using the custom hook
+        const userActivityResponse = await useUserActivity(userId);
+
+        //check if the response has data
+        if (userActivityResponse && userActivityResponse.data) {
+          //set the sessions state with the fetched data
+          setSessions(userActivityResponse.data.sessions);
+        }
+      }
+      //set the loading state to false after data is fetched
+      setLoading(false);
+    };
+
+    //call the fetchData function
+    fetchData();
+    //the effect depends on userId and isMockData, so it will re-run if these change
+  }, [userId, isMockData]);
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   const minKilogram = Math.min(...sessions.map((session) => session.kilogram));
   const maxKilogram = Math.max(...sessions.map((session) => session.kilogram));
-
-  console.log(sessions);
 
   //return the html
   return (

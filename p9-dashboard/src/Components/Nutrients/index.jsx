@@ -4,20 +4,45 @@ import carbsIcon from "../../assets/carbs-icon.png";
 import fatIcon from "../../assets/fat-icon.png";
 import proteinIcon from "../../assets/protein-icon.png";
 import { USER_MAIN_DATA } from "../../mockApi/mockData";
+import { useEffect, useState } from "react";
 
 const Nutrients = ({ userId, isMockData }) => {
-  console.log(USER_MAIN_DATA);
-  let keyData;
+  // create state for key data
+  const [keyData, setKeyData] = useState(null);
+  // create state for loading status
+  const [loading, setLoading] = useState(true);
 
-  if (isMockData) {
-    let filteredData = USER_MAIN_DATA.filter((item) => item.id === userId)[0];
-    keyData = filteredData.keyData;
-  } else {
-    const userMainData = useUserMainData(userId);
-    if (!userMainData) {
-      return <div>Loading...</div>;
-    }
-    keyData = userMainData.data.keyData;
+  // useEffect to fetch data when component mounts or when userId or isMockData changes
+  useEffect(() => {
+    // define an async function to fetch the data
+    const fetchData = async () => {
+      if (isMockData) {
+        // filter the mock data to find the user main data for the given userId
+        let filteredData = USER_MAIN_DATA.filter(
+          (item) => item.id === userId
+        )[0];
+        // set the keyData state with the filtered data
+        setKeyData(filteredData.keyData);
+      } else {
+        // fetch the user main data using the custom hook
+        const userMainData = await useUserMainData(userId);
+        // check if the response has data
+        if (userMainData && userMainData.data) {
+          // set the keyData state with the fetched data
+          setKeyData(userMainData.data.keyData);
+        }
+      }
+      // set loading to false after data is fetched
+      setLoading(false);
+    };
+
+    // call the fetchData function
+    fetchData();
+  }, [userId, isMockData]);
+
+  // show loading message if data is still being fetched
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   const imageMap = {

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   LineChart,
   Line,
@@ -11,6 +10,7 @@ import {
 } from "recharts";
 import useUserAverageSessions from "../../hooks/averageSessions.js"; // Path to your custom hook
 import { USER_AVERAGE_SESSIONS } from "../../mockApi/mockData.js";
+import { useEffect, useState } from "react";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -34,26 +34,47 @@ const CustomTooltip = ({ active, payload }) => {
 const daysInFrench = ["L", "M", "M", "J", "V", "S", "D"];
 
 const UserAverageSessionsChart = ({ userId, isMockData }) => {
-  let sessions;
-  if (isMockData) {
-    const filteredData = USER_AVERAGE_SESSIONS.filter(
-      (item) => item.userId === userId
-    )[0];
-    sessions = filteredData.sessions;
-  } else {
-    const userAverageSessions = useUserAverageSessions(userId);
+  //create state for sessions data
+  const [sessions, setSessions] = useState(null);
+  //create state for loading status
+  const [loading, setLoading] = useState(true);
 
-    if (!userAverageSessions) {
-      return <div>Loading...</div>;
-    }
-    sessions = userAverageSessions.data.sessions;
+  //useEffect to fetch data when component mounts or when userId or isMockData changes
+  useEffect(() => {
+    //define an async function to fetch the data
+    const fetchData = async () => {
+      if (isMockData) {
+        //filter the mock data to find the average sessions for the given userId
+        const filteredData = USER_AVERAGE_SESSIONS.filter(
+          (item) => item.userId === userId
+        )[0];
+        //set the sessions state with the filtered data
+        setSessions(filteredData.sessions);
+      } else {
+        //fetch the user average sessions data using the custom hook
+        const userAverageSessions = await useUserAverageSessions(userId);
+
+        //check if the response has data
+        if (userAverageSessions && userAverageSessions.data) {
+          //set the sessions state with the fetched data
+          setSessions(userAverageSessions.data.sessions);
+        }
+      }
+      //set loading to false after data is fetched
+      setLoading(false);
+    };
+
+    //call the fetchData function
+    fetchData();
+  }, [userId, isMockData]);
+
+  //show loading message if data is still being fetched
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="lineChart">
-      {/* <div className="title">
-        <h2>Durée moyenne des sessions</h2>
-      </div> */}
       <ResponsiveContainer className="responsive-container">
         <LineChart data={sessions}>
           <XAxis
@@ -73,7 +94,6 @@ const UserAverageSessionsChart = ({ userId, isMockData }) => {
             strokeWidth={2}
             activeDot={{ stroke: "#f0f0f0", strokeWidth: 5, r: 5 }}
             className="line"
-            // isAnimationActive={false}
           />
         </LineChart>
       </ResponsiveContainer>
