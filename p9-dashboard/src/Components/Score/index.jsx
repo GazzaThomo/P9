@@ -29,6 +29,7 @@ const UserScore = ({ userId, isMockData }) => {
       } else {
         // fetch the user main data using the custom hook
         const userMainDataResponse = await useUserMainData(userId);
+        console.log(userMainDataResponse);
         // check if the response has data
         if (userMainDataResponse && userMainDataResponse.data) {
           // set the userMainData state with the fetched data

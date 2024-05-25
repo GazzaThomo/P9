@@ -1,23 +1,31 @@
 import { useEffect, useState } from "react";
 import apiClient from "../mockApi/mockApiService.js";
+import { USER_AVERAGE_SESSIONS } from "../mockApi/mockData.js";
 
-function useUserAverageSessions(userId) {
+function useUserAverageSessions(userId, isMockData) {
   const [userAverageSessions, setUserAverageSessions] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get(
-          `/user/${userId}/average-sessions`
-        );
-        setUserAverageSessions(response.data);
+        if (isMockData) {
+          const mockUserData = USER_AVERAGE_SESSIONS.find(
+            (user) => user.userId === userId
+          );
+          setUserAverageSessions(mockUserData);
+        } else {
+          const response = await apiClient.get(
+            `/user/${userId}/average-sessions`
+          );
+          setUserAverageSessions(response.data.data);
+        }
       } catch (error) {
-        console.error("Error fetching user average sessions:", error);
+        console.log("Error fetching user average sessions", error);
       }
     };
 
     if (userId) fetchData();
-  }, [userId]);
+  }, [userId, isMockData]);
 
   return userAverageSessions;
 }

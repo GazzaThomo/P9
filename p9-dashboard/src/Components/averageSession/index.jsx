@@ -1,15 +1,5 @@
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import useUserAverageSessions from "../../hooks/averageSessions.js"; // Path to your custom hook
-import { USER_AVERAGE_SESSIONS } from "../../mockApi/mockData.js";
 import { useEffect, useState } from "react";
 
 const CustomTooltip = ({ active, payload }) => {
@@ -34,39 +24,23 @@ const CustomTooltip = ({ active, payload }) => {
 const daysInFrench = ["L", "M", "M", "J", "V", "S", "D"];
 
 const UserAverageSessionsChart = ({ userId, isMockData }) => {
-  //create state for sessions data
+  //create state for sessions
   const [sessions, setSessions] = useState(null);
   //create state for loading status
   const [loading, setLoading] = useState(true);
+  //call to fetch the data
+  const userAverageSessionsResponse = useUserAverageSessions(
+    userId,
+    isMockData
+  );
 
-  //useEffect to fetch data when component mounts or when userId or isMockData changes
+  //useEffect to manage loading status
   useEffect(() => {
-    //define an async function to fetch the data
-    const fetchData = async () => {
-      if (isMockData) {
-        //filter the mock data to find the average sessions for the given userId
-        const filteredData = USER_AVERAGE_SESSIONS.filter(
-          (item) => item.userId === userId
-        )[0];
-        //set the sessions state with the filtered data
-        setSessions(filteredData.sessions);
-      } else {
-        //fetch the user average sessions data using the custom hook
-        const userAverageSessions = await useUserAverageSessions(userId);
-
-        //check if the response has data
-        if (userAverageSessions && userAverageSessions.data) {
-          //set the sessions state with the fetched data
-          setSessions(userAverageSessions.data.sessions);
-        }
-      }
-      //set loading to false after data is fetched
+    if (userAverageSessionsResponse) {
+      setSessions(userAverageSessionsResponse.sessions);
       setLoading(false);
-    };
-
-    //call the fetchData function
-    fetchData();
-  }, [userId, isMockData]);
+    }
+  }, [userAverageSessionsResponse]);
 
   //show loading message if data is still being fetched
   if (loading) {

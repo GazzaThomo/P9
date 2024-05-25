@@ -7,44 +7,26 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
 } from "recharts";
-import { USER_PERFORMANCE } from "../../mockApi/mockData.js";
 
 const UserPerformanceChart = ({ userId, isMockData }) => {
   //create state for user data
   const [userData, setUserData] = useState(null);
   //create state for loading status
   const [loading, setLoading] = useState(true);
+  const userPerformanceResponse = useUserPerformence(userId, isMockData);
 
   //useEffect to fetch data when component mounts or when userId or isMockData changes
   useEffect(() => {
     //define an async function to fetch the data
-    const fetchData = async () => {
-      if (isMockData) {
-        //filter the mock data to find the user performance for the given userId
-        const filteredData = USER_PERFORMANCE.filter(
-          (item) => item.userId === userId
-        )[0];
-        //set the userData state with the filtered data
-        setUserData(filteredData);
-      } else {
-        //fetch the user performance data using the custom hook
-        const userPerformanceResponse = await useUserPerformence(userId);
-        //check if the response has data
-        if (userPerformanceResponse && userPerformanceResponse.data) {
-          //set the userData state with the fetched data
-          setUserData(userPerformanceResponse.data);
-        }
-      }
-      //set loading to false after data is fetched
+    if (userPerformanceResponse) {
+      setUserData(userPerformanceResponse);
       setLoading(false);
-    };
+    }
 
     //call the fetchData function
-    fetchData();
-  }, [userId, isMockData]);
+  }, [userPerformanceResponse]);
 
   //show loading message if data is still being fetched
   if (loading) {
