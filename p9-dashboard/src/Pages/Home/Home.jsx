@@ -18,14 +18,14 @@ function Home({ id }) {
         <div className="main-charts">
           {" "}
           <div className="charts-container" style={{ height: "100%" }}>
-            {/* <UserActivityChart userId={id} isMockData={isMockData} /> */}
+            <UserActivityChart userId={id} isMockData={isMockData} />
             <div className="small-charts-container">
               <UserAverageSessionsChart userId={id} isMockData={isMockData} />
               <UserPerformanceChart userId={id} isMockData={isMockData} />
-              {/* <UserScore userId={id} isMockData={isMockData} /> */}
+              <UserScore userId={id} isMockData={isMockData} />
             </div>
           </div>
-          {/* <Nutrients userId={id} isMockData={isMockData} /> */}
+          <Nutrients userId={id} isMockData={isMockData} />
         </div>
       </div>
     </>

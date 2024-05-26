@@ -6,51 +6,26 @@ import {
   PolarAngleAxis,
 } from "recharts";
 import useUserMainData from "../../hooks/mainData.js";
-import { USER_MAIN_DATA } from "../../mockApi/mockData.js";
 import { useEffect, useState } from "react";
 
-const UserScore = ({ userId, isMockData }) => {
-  // create state for user main data
-  const [userMainData, setUserMainData] = useState(null);
-  // create state for loading status
+function UserScore({ userId, isMockData }) {
+  const [userMainData, setUserMainData] = useState("");
   const [loading, setLoading] = useState(true);
-
-  // useEffect to fetch data when component mounts or when userId or isMockData changes
+  const userMainDataResponse = useUserMainData(userId, isMockData);
+  console.log(userMainDataResponse);
   useEffect(() => {
-    // define an async function to fetch the data
-    const fetchData = async () => {
-      if (isMockData) {
-        // filter the mock data to find the user main data for the given userId
-        const filteredData = USER_MAIN_DATA.filter(
-          (item) => item.id === userId
-        )[0];
-        // set the userMainData state with the filtered data
-        setUserMainData(filteredData);
-      } else {
-        // fetch the user main data using the custom hook
-        const userMainDataResponse = await useUserMainData(userId);
-        console.log(userMainDataResponse);
-        // check if the response has data
-        if (userMainDataResponse && userMainDataResponse.data) {
-          // set the userMainData state with the fetched data
-          setUserMainData(userMainDataResponse.data);
-        }
-      }
-      // set loading to false after data is fetched
+    if (userMainDataResponse) {
+      setUserMainData(userMainDataResponse.userInfos);
       setLoading(false);
-    };
+    }
+  }, [userMainDataResponse]);
 
-    // call the fetchData function
-    fetchData();
-  }, [userId, isMockData]);
-
-  // show loading message if data is still being fetched
   if (loading) {
     return <div>Loading...</div>;
   }
 
   // need nullish here because there are 2 keys in the data, score and todayScore ???
-  const score = userMainData.todayScore ?? userMainData.score;
+  const score = userMainDataResponse.todayScore ?? userMainDataResponse.score;
 
   // format data for the chart
   const scoreData = [
@@ -124,6 +99,6 @@ const UserScore = ({ userId, isMockData }) => {
       </ResponsiveContainer>
     </div>
   );
-};
+}
 
 export default UserScore;

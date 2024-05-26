@@ -11,7 +11,6 @@ import {
   Text,
 } from "recharts";
 import useUserActivity from "../../hooks/userActivity.js";
-import { USER_ACTIVITY } from "../../mockApi/mockData.js";
 
 //for tooltip, needs changing css side
 const CustomTooltip = ({ active, payload }) => {
@@ -70,36 +69,14 @@ const LegendComponent = () => (
 const UserActivityChart = ({ userId, isMockData }) => {
   const [sessions, setSessions] = useState(null);
   const [loading, setLoading] = useState(true);
+  const userActivityResponse = useUserActivity(userId, isMockData);
 
   useEffect(() => {
-    //define an asynchronous function to fetch the data
-    const fetchData = async () => {
-      //check if we're using mock data
-      if (isMockData) {
-        //filter the mock data to find the sessions for the given userId
-        const filteredData = USER_ACTIVITY.filter(
-          (item) => item.userId === userId
-        )[0];
-        //set the sessions state with the filtered data
-        setSessions(filteredData.sessions);
-      } else {
-        //if not using mock data, fetch data using the custom hook
-        const userActivityResponse = await useUserActivity(userId);
-
-        //check if the response has data
-        if (userActivityResponse && userActivityResponse.data) {
-          //set the sessions state with the fetched data
-          setSessions(userActivityResponse.data.sessions);
-        }
-      }
-      //set the loading state to false after data is fetched
+    if (userActivityResponse) {
+      setSessions(userActivityResponse.sessions);
       setLoading(false);
-    };
-
-    //call the fetchData function
-    fetchData();
-    //the effect depends on userId and isMockData, so it will re-run if these change
-  }, [userId, isMockData]);
+    }
+  }, [userActivityResponse]);
 
   if (loading) {
     return <div>Loading...</div>;

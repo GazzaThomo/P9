@@ -7,40 +7,55 @@ import { USER_MAIN_DATA } from "../../mockApi/mockData";
 import { useEffect, useState } from "react";
 
 const Nutrients = ({ userId, isMockData }) => {
-  // create state for key data
-  const [keyData, setKeyData] = useState(null);
-  // create state for loading status
+  // // create state for key data
+  // const [keyData, setKeyData] = useState(null);
+  // // create state for loading status
+  // const [loading, setLoading] = useState(true);
+
+  // // useEffect to fetch data when component mounts or when userId or isMockData changes
+  // useEffect(() => {
+  //   // define an async function to fetch the data
+  //   const fetchData = async () => {
+  //     if (isMockData) {
+  //       // filter the mock data to find the user main data for the given userId
+  //       let filteredData = USER_MAIN_DATA.filter(
+  //         (item) => item.id === userId
+  //       )[0];
+  //       // set the keyData state with the filtered data
+  //       setKeyData(filteredData.keyData);
+  //     } else {
+  //       // fetch the user main data using the custom hook
+  //       const userMainData = await useUserMainData(userId);
+  //       // check if the response has data
+  //       if (userMainData && userMainData.data) {
+  //         // set the keyData state with the fetched data
+  //         setKeyData(userMainData.data.keyData);
+  //       }
+  //     }
+  //     // set loading to false after data is fetched
+  //     setLoading(false);
+  //   };
+
+  //   // call the fetchData function
+  //   fetchData();
+  // }, [userId, isMockData]);
+
+  // // show loading message if data is still being fetched
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  const [keyData, setKeyData] = useState("");
   const [loading, setLoading] = useState(true);
+  const userMainDataResponse = useUserMainData(userId, isMockData);
 
-  // useEffect to fetch data when component mounts or when userId or isMockData changes
   useEffect(() => {
-    // define an async function to fetch the data
-    const fetchData = async () => {
-      if (isMockData) {
-        // filter the mock data to find the user main data for the given userId
-        let filteredData = USER_MAIN_DATA.filter(
-          (item) => item.id === userId
-        )[0];
-        // set the keyData state with the filtered data
-        setKeyData(filteredData.keyData);
-      } else {
-        // fetch the user main data using the custom hook
-        const userMainData = await useUserMainData(userId);
-        // check if the response has data
-        if (userMainData && userMainData.data) {
-          // set the keyData state with the fetched data
-          setKeyData(userMainData.data.keyData);
-        }
-      }
-      // set loading to false after data is fetched
+    if (userMainDataResponse) {
+      setKeyData(userMainDataResponse.keyData);
       setLoading(false);
-    };
+    }
+  }, [userMainDataResponse]);
 
-    // call the fetchData function
-    fetchData();
-  }, [userId, isMockData]);
-
-  // show loading message if data is still being fetched
   if (loading) {
     return <div>Loading...</div>;
   }
