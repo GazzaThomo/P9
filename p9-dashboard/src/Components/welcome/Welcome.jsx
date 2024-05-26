@@ -19,10 +19,12 @@ function Welcome({ userId, isMockData }) {
 
   return (
     <div>
-      <p>
-        Bonjour, <span>{userName}</span>
+      <h1 className="hello-text">
+        Bonjour, <span className="hello-text-user">{userName}</span>
+      </h1>
+      <p className="hello-text-sub-message">
+        Félicitations ! Vous avez explosé vos objectifs hier 👏
       </p>
-      <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
     </div>
   );
 }

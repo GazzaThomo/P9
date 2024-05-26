@@ -34,3 +34,16 @@
     border-radius: 5px;
   }
 }
+
+.hello-text {
+  font-size: 48px;
+  font-weight: 500;
+
+  &-user {
+    color: #ff0101;
+  }
+
+  &-sub-message {
+    font-size: 18px;
+  }
+}
