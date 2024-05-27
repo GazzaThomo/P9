@@ -149,10 +149,10 @@ body {
 
 .lineChart {
   background-color: red;
-  padding: 0;
   width: 100%;
   height: 100%;
   position: relative;
+  padding: 0 10px;
 }
 .lineChart::before {
   content: "Durée moyenne des sessions";
@@ -180,6 +180,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: #282d30;
+  padding: 0 10px;
 }
 .radialChart .responsive-container {
   width: 80%;
@@ -196,6 +197,11 @@ body {
   word-wrap: break-word;
 }
 
+@media screen and (max-width: 1440px) {
+  .radialChart tspan {
+    font-size: 10px;
+  }
+}
 .scoreChart {
   width: 100%;
   height: 100%;
@@ -247,4 +253,10 @@ body {
 }
 .hello-text-sub-message {
   font-size: 18px;
+}
+
+@media screen and (max-width: 1440px) {
+  .home-container {
+    margin: 0 2.5% 0 2.5%;
+  }
 }/*# sourceMappingURL=main.css.map */

@@ -67,7 +67,10 @@ const UserPerformanceChart = ({ userId, isMockData }) => {
       <ResponsiveContainer className="responsive-container">
         <RadarChart cx="50%" cy="50%" outerRadius="70%" data={transformedData}>
           <PolarGrid radialLines={false} />
-          <PolarAngleAxis dataKey="kind" />
+          <PolarAngleAxis
+            dataKey="kind"
+            tick={{ fill: "#fff", fontSize: 12, fontWeight: 500 }}
+          />
           <Radar name="user" dataKey="value" fill="#ff0101" fillOpacity={0.7} />
         </RadarChart>
       </ResponsiveContainer>

@@ -73,6 +73,14 @@ const UserActivityChart = ({ userId, isMockData }) => {
 
   useEffect(() => {
     if (userActivityResponse) {
+      //This is for if we want numbered sessions 1 through x
+      // const transformedSessions = userActivityResponse.sessions.map(
+      //   (session, index) => ({
+      //     ...session,
+      //     index: index + 1,
+      //   })
+      // );
+      // setSessions(transformedSessions);
       setSessions(userActivityResponse.sessions);
       setLoading(false);
     }
@@ -86,6 +94,7 @@ const UserActivityChart = ({ userId, isMockData }) => {
   const maxKilogram = Math.max(...sessions.map((session) => session.kilogram));
 
   //return the html
+  //for the xaxis, don't forget to change dataKey to index or day depending on what we want
   return (
     <div className="barChart">
       <div className="title">

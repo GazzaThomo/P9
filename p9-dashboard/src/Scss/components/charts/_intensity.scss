@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   background-color: #282d30;
-  // padding: 5px;
+  padding: 0 10px;
 
   .responsive-container {
     width: 80%;
@@ -20,6 +20,14 @@
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .radialChart {
+    tspan {
+      font-size: 10px;
     }
   }
 }

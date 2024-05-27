@@ -1,9 +1,9 @@
 .lineChart {
   background-color: red; // Set the background color to red
-  padding: 0; // Remove default padding if any
   width: 100%;
   height: 100%;
   position: relative;
+  padding: 0 10px;
 
   &::before {
     content: "Durée moyenne des sessions";
