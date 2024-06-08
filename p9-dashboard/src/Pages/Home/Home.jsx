@@ -17,7 +17,7 @@ function Home({ id }) {
         </div>{" "}
         <div className="main-charts">
           {" "}
-          <div className="charts-container" style={{ height: "100%" }}>
+          <div className="charts-container">
             <UserActivityChart userId={id} isMockData={isMockData} />
             <div className="small-charts-container">
               <UserAverageSessionsChart userId={id} isMockData={isMockData} />
