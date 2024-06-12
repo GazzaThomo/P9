@@ -85,7 +85,9 @@ body {
   background-color: #fbfbfb;
   border-radius: 5px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+  height: 320px;
   width: 100%;
+  margin-bottom: 150px;
 }
 .barChart .custom-tooltip {
   background: white;

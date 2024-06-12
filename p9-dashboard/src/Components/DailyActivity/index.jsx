@@ -11,6 +11,7 @@ import {
   Text,
 } from "recharts";
 import useUserActivity from "../../hooks/userActivity.js";
+import { useFetch } from "../../hooks/useFetch";
 
 //for tooltip, needs changing css side
 const CustomTooltip = ({ active, payload }) => {
@@ -69,7 +70,7 @@ const LegendComponent = () => (
 const UserActivityChart = ({ userId, isMockData }) => {
   const [sessions, setSessions] = useState(null);
   const [loading, setLoading] = useState(true);
-  const userActivityResponse = useUserActivity(userId, isMockData);
+  const userActivityResponse = useFetch("activity", userId, isMockData);
 
   useEffect(() => {
     if (userActivityResponse) {

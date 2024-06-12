@@ -5,18 +5,23 @@ import {
   ResponsiveContainer,
   PolarAngleAxis,
 } from "recharts";
-import useUserMainData from "../../hooks/mainData.js";
 import { useEffect, useState } from "react";
+import { useFetch } from "../../hooks/useFetch";
 
 function UserScore({ userId, isMockData }) {
   const [userMainData, setUserMainData] = useState("");
+  const [userScoreData, setUserScoreData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const userMainDataResponse = useUserMainData(userId, isMockData);
-  console.log(userMainDataResponse);
+  const userMainDataResponse = useFetch("mainData", userId, isMockData);
+
   useEffect(() => {
     if (userMainDataResponse) {
       setUserMainData(userMainDataResponse.userInfos);
+      const score =
+        userMainDataResponse.todayScore ?? userMainDataResponse.score ?? 0;
+      setUserScoreData(score);
       setLoading(false);
+      console.log(console.log(userMainData));
     }
   }, [userMainDataResponse]);
 
@@ -24,18 +29,15 @@ function UserScore({ userId, isMockData }) {
     return <div>Loading...</div>;
   }
 
-  // need nullish here because there are 2 keys in the data, score and todayScore ???
-  const score = userMainDataResponse.todayScore ?? userMainDataResponse.score;
-
   // format data for the chart
   const scoreData = [
     {
       name: "Score",
-      value: score * 100,
+      value: userScoreData * 100,
       fill: "#ff0000",
     },
   ];
-  console.log(score);
+  // console.log(score);
 
   return (
     <div className="scoreChart">

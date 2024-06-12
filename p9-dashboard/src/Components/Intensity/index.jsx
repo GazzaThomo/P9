@@ -1,6 +1,3 @@
-//add tooltip if time permits
-
-import useUserPerformence from "../../hooks/userPerformance.js";
 import { useEffect, useState } from "react";
 import {
   Radar,
@@ -9,23 +6,23 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
 } from "recharts";
+import { useFetch } from "../../hooks/useFetch";
 
 const UserPerformanceChart = ({ userId, isMockData }) => {
   //create state for user data
   const [userData, setUserData] = useState(null);
   //create state for loading status
   const [loading, setLoading] = useState(true);
-  const userPerformanceResponse = useUserPerformence(userId, isMockData);
 
-  //useEffect to fetch data when component mounts or when userId or isMockData changes
+  //use the useFetch function to get the performance data
+  const userPerformanceResponse = useFetch("performance", userId, isMockData);
+
+  //useEffect to handle the data fetched by useFetch
   useEffect(() => {
-    //define an async function to fetch the data
     if (userPerformanceResponse) {
       setUserData(userPerformanceResponse);
       setLoading(false);
     }
-
-    //call the fetchData function
   }, [userPerformanceResponse]);
 
   //show loading message if data is still being fetched

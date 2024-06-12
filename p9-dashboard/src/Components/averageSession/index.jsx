@@ -1,5 +1,5 @@
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
-import useUserAverageSessions from "../../hooks/averageSessions.js"; // Path to your custom hook
+import { useFetch } from "../../hooks/useFetch";
 import { useEffect, useState } from "react";
 
 const CustomTooltip = ({ active, payload }) => {
@@ -29,7 +29,8 @@ const UserAverageSessionsChart = ({ userId, isMockData }) => {
   //create state for loading status
   const [loading, setLoading] = useState(true);
   //call to fetch the data
-  const userAverageSessionsResponse = useUserAverageSessions(
+  const userAverageSessionsResponse = useFetch(
+    "averageSession",
     userId,
     isMockData
   );
