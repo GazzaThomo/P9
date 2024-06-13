@@ -15,20 +15,21 @@ function Home({ userId }) {
   const [loading, setLoading] = useState(true);
   const userMainDataResponse = useFetch("mainData", userId, isMockData);
 
-  // Validate the user ID and handle errors
+  //validate the user ID and handle errors
   useEffect(() => {
     if (userMainDataResponse === null) {
       setIsValidId(false);
-      setLoading(false);
-    } else if (userMainDataResponse) {
+    } else {
       setIsValidId(true);
-      setLoading(false);
     }
+    setLoading(false);
   }, [userId, isMockData, userMainDataResponse]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  //render error page if no id is found
   if (!isValidId) {
     return <ErrorPage />;
   }
