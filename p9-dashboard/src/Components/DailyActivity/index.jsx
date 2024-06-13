@@ -75,14 +75,14 @@ const UserActivityChart = ({ userId, isMockData }) => {
   useEffect(() => {
     if (userActivityResponse) {
       //This is for if we want numbered sessions 1 through x
-      // const transformedSessions = userActivityResponse.sessions.map(
-      //   (session, index) => ({
-      //     ...session,
-      //     index: index + 1,
-      //   })
-      // );
-      // setSessions(transformedSessions);
-      setSessions(userActivityResponse.sessions);
+      const transformedSessions = userActivityResponse.sessions.map(
+        (session, index) => ({
+          ...session,
+          index: index + 1,
+        })
+      );
+      setSessions(transformedSessions);
+      // setSessions(userActivityResponse.sessions);
       setLoading(false);
     }
   }, [userActivityResponse]);
@@ -109,7 +109,8 @@ const UserActivityChart = ({ userId, isMockData }) => {
             horizontal={true}
             vertical={false}
           />
-          <XAxis dataKey="day" tickLine={false} axisLine={false} />
+          {/* <XAxis dataKey="day" tickLine={false} axisLine={false} /> */}
+          <XAxis dataKey="index" tickLine={false} axisLine={false} />
           <YAxis
             yAxisId="right"
             dataKey="kilogram"
