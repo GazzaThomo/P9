@@ -5,6 +5,7 @@ import {
   useUserPerformance,
 } from "./service.js";
 
+//use a switch to reduce complexity in calling data in components
 export function useFetch(dataCallType, id, isMockData) {
   switch (dataCallType) {
     case "averageSession":

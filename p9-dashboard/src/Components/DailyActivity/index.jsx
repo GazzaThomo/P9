@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
   Text,
 } from "recharts";
-import useUserActivity from "../../hooks/userActivity.js";
 import { useFetch } from "../../hooks/useFetch";
 
 //for tooltip, needs changing css side
@@ -91,6 +90,7 @@ const UserActivityChart = ({ userId, isMockData }) => {
     return <div>Loading...</div>;
   }
 
+  //create 2 variables for the min and max on graph axis
   const minKilogram = Math.min(...sessions.map((session) => session.kilogram));
   const maxKilogram = Math.max(...sessions.map((session) => session.kilogram));
 
