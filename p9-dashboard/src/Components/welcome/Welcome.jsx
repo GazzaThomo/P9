@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import useUserMainData from "../../hooks/mainData.js";
+import { useFetch } from "../../hooks/useFetch";
 
 function Welcome({ userId, isMockData }) {
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
-  const userMainDataResponse = useUserMainData(userId, isMockData);
+  const userMainDataResponse = useFetch("mainData", userId, isMockData);
 
   useEffect(() => {
     if (userMainDataResponse) {

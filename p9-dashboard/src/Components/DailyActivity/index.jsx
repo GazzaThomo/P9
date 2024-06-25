@@ -13,6 +13,7 @@ import {
 import { useFetch } from "../../hooks/useFetch";
 
 //for tooltip, needs changing css side
+// https://medium.com/@rutudhokchaule/implementing-custom-tooltips-and-legends-using-recharts-98b6e3c8b712
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const { kilogram, calories } = payload[0].payload;
