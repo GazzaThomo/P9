@@ -8,7 +8,7 @@ import Welcome from "../../Components/welcome/Welcome.jsx";
 import { useFetch } from "../../hooks/useFetch";
 import ErrorPage from "../../Components/ErrorPage/index.jsx";
 
-const isMockData = false;
+const isMockData = true;
 
 function Home({ userId }) {
   const [isValidId, setIsValidId] = useState(true);

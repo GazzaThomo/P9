@@ -76,11 +76,16 @@ body {
   transform-origin: center;
   position: absolute;
   left: 50%;
-  bottom: 10px; /* Adjust this value as needed */
-  white-space: nowrap; /* prevent text wrapping */
-  translate: -50% 0; /* center the text */
+  bottom: 75px;
+  white-space: nowrap;
+  translate: -50% 0;
 }
 
+@media all and (max-height: 750px) {
+  .sidebar--text {
+    display: none;
+  }
+}
 .barChart {
   background-color: #fbfbfb;
   border-radius: 5px;
