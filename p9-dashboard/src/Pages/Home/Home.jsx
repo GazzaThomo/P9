@@ -8,7 +8,11 @@ import Welcome from "../../Components/welcome/Welcome.jsx";
 import { useFetch } from "../../hooks/useFetch";
 import ErrorPage from "../../Components/ErrorPage/index.jsx";
 
-const isMockData = true;
+//import.meta is special js module that containes metadata
+//import.meta.env exposes the .env files
+//vite automatically loads env varibales from .env, and makes them usable via import.meta.env
+const isMockData = import.meta.env.VITE_USE_MOCK_DATA === "true";
+// const isMockData = false;
 
 function Home({ userId }) {
   const [isValidId, setIsValidId] = useState(true);
