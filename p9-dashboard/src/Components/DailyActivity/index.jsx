@@ -11,6 +11,7 @@ import {
   Text,
 } from "recharts";
 import { useFetch } from "../../hooks/useFetch";
+import { transformMockData } from "../../utils/dataTransform";
 
 //for tooltip, needs changing css side
 // https://medium.com/@rutudhokchaule/implementing-custom-tooltips-and-legends-using-recharts-98b6e3c8b712
@@ -74,15 +75,11 @@ const UserActivityChart = ({ userId, isMockData }) => {
 
   useEffect(() => {
     if (userActivityResponse) {
-      //This is for if we want numbered sessions 1 through x
-      const transformedSessions = userActivityResponse.sessions.map(
-        (session, index) => ({
-          ...session,
-          index: index + 1,
-        })
+      const transformedSessions = transformMockData(
+        "activity",
+        userActivityResponse.sessions
       );
       setSessions(transformedSessions);
-      // setSessions(userActivityResponse.sessions);
       setLoading(false);
     }
   }, [userActivityResponse]);
@@ -96,7 +93,6 @@ const UserActivityChart = ({ userId, isMockData }) => {
   // const maxKilogram = Math.max(...sessions.map((session) => session.kilogram));
 
   //return the html
-  //for the xaxis, don't forget to change dataKey to index or day depending on what we want
   return (
     <div className="barChart">
       <div className="title">
@@ -110,7 +106,6 @@ const UserActivityChart = ({ userId, isMockData }) => {
             horizontal={true}
             vertical={false}
           />
-          {/* <XAxis dataKey="day" tickLine={false} axisLine={false} /> */}
           <XAxis dataKey="index" tickLine={false} axisLine={false} />
           <YAxis
             yAxisId="right"

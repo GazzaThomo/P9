@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { useFetch } from "../../hooks/useFetch";
 import { useEffect, useState } from "react";
+import { transformMockData } from "../../utils/dataTransform";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -21,8 +22,6 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const daysInFrench = ["L", "M", "M", "J", "V", "S", "D"];
-
 const UserAverageSessionsChart = ({ userId, isMockData }) => {
   //create state for sessions
   const [sessions, setSessions] = useState(null);
@@ -38,7 +37,12 @@ const UserAverageSessionsChart = ({ userId, isMockData }) => {
   //useEffect to manage loading status
   useEffect(() => {
     if (userAverageSessionsResponse) {
-      setSessions(userAverageSessionsResponse.sessions);
+      //use utility function to return clean data
+      const transformedData = transformMockData(
+        "averageSession",
+        userAverageSessionsResponse.sessions
+      );
+      setSessions(transformedData);
       setLoading(false);
     }
   }, [userAverageSessionsResponse]);
@@ -54,7 +58,7 @@ const UserAverageSessionsChart = ({ userId, isMockData }) => {
         <LineChart data={sessions}>
           <XAxis
             dataKey="day"
-            tickFormatter={(value) => daysInFrench[value - 1]}
+            // tickFormatter={(value) => value}
             axisLine={false}
             tickLine={false}
             className="xaxis"

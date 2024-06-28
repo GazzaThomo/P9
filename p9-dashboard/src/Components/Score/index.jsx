@@ -1,43 +1,32 @@
 import {
   RadialBarChart,
   RadialBar,
-  Legend,
   ResponsiveContainer,
   PolarAngleAxis,
 } from "recharts";
 import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
+import { transformMockData } from "../../utils/dataTransform"; // Import the utility function
 
 function UserScore({ userId, isMockData }) {
-  const [userMainData, setUserMainData] = useState("");
   const [userScoreData, setUserScoreData] = useState(null);
   const [loading, setLoading] = useState(true);
   const userMainDataResponse = useFetch("mainData", userId, isMockData);
 
   useEffect(() => {
     if (userMainDataResponse) {
-      setUserMainData(userMainDataResponse.userInfos);
-      const score =
-        userMainDataResponse.todayScore ?? userMainDataResponse.score ?? 0;
-      setUserScoreData(score);
+      const transformedScoreData = transformMockData(
+        "score",
+        userMainDataResponse
+      );
+      setUserScoreData(transformedScoreData);
       setLoading(false);
-      console.log(console.log(userMainData));
     }
   }, [userMainDataResponse]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  // format data for the chart
-  const scoreData = [
-    {
-      name: "Score",
-      value: userScoreData * 100,
-      fill: "#ff0000",
-    },
-  ];
-  // console.log(score);
 
   return (
     <div className="scoreChart">
@@ -50,7 +39,7 @@ function UserScore({ userId, isMockData }) {
           startAngle={210} // this is for the gap at bottom
           endAngle={-150}
           barSize={15}
-          data={scoreData}
+          data={userScoreData}
         >
           <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
           <RadialBar label={false} cornerRadius={10} dataKey="value" />
@@ -75,7 +64,7 @@ function UserScore({ userId, isMockData }) {
               fontWeight: "bold",
             }}
           >
-            {`${scoreData[0].value}%`}
+            {`${userScoreData[0].value}%`}
           </text>
           <text
             x="50%"

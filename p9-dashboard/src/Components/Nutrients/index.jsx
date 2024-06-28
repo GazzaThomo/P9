@@ -1,9 +1,6 @@
-import caloriesIcon from "../../assets/calories-icon.png";
-import carbsIcon from "../../assets/carbs-icon.png";
-import fatIcon from "../../assets/fat-icon.png";
-import proteinIcon from "../../assets/protein-icon.png";
 import { useFetch } from "../../hooks/useFetch";
 import { useEffect, useState } from "react";
+import { transformMockData } from "../../utils/dataTransform";
 
 const Nutrients = ({ userId, isMockData }) => {
   const [keyData, setKeyData] = useState("");
@@ -12,7 +9,11 @@ const Nutrients = ({ userId, isMockData }) => {
 
   useEffect(() => {
     if (userMainDataResponse) {
-      setKeyData(userMainDataResponse.keyData);
+      const transformedKeyData = transformMockData(
+        "keyData",
+        userMainDataResponse.keyData
+      );
+      setKeyData(transformedKeyData);
       setLoading(false);
     }
   }, [userMainDataResponse]);
@@ -21,32 +22,16 @@ const Nutrients = ({ userId, isMockData }) => {
     return <div>Loading...</div>;
   }
 
-  const imageMap = {
-    calorieCount: caloriesIcon,
-    proteinCount: proteinIcon,
-    carbohydrateCount: carbsIcon,
-    lipidCount: fatIcon,
-  };
-
-  const titleMap = {
-    calorieCount: "Calories",
-    proteinCount: "Proteines",
-    carbohydrateCount: "Glucides",
-    lipidCount: "Lipides",
-  };
-
-  // const keyData = userMainData.data.keyData;
-
   return (
     <div className="nutrients">
-      {Object.entries(keyData).map(([key, value]) => (
+      {keyData.map(({ key, value, image, title }) => (
         <div key={key} className="nutrients-container">
-          <img src={imageMap[key]} alt={key} className="nutrients-image" />
+          <img src={image} alt={key} className="nutrients-image" />
           <div className="nutrients-text">
             <p className="nutrients-text-data">{`${value}${
               key === "calorieCount" ? "kCal" : "g"
             }`}</p>
-            <p className="nutrients-text-type">{titleMap[key]}</p>
+            <p className="nutrients-text-type">{title}</p>
           </div>
         </div>
       ))}

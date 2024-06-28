@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useFetch } from "../../hooks/useFetch";
+import { transformMockData } from "../../utils/dataTransform";
 
 const UserPerformanceChart = ({ userId, isMockData }) => {
   //create state for user data
@@ -20,7 +21,11 @@ const UserPerformanceChart = ({ userId, isMockData }) => {
   //useEffect to handle the data fetched by useFetch
   useEffect(() => {
     if (userPerformanceResponse) {
-      setUserData(userPerformanceResponse);
+      const transformedData = transformMockData(
+        "performance",
+        userPerformanceResponse.data
+      );
+      setUserData(transformedData);
       setLoading(false);
     }
   }, [userPerformanceResponse]);
@@ -30,39 +35,11 @@ const UserPerformanceChart = ({ userId, isMockData }) => {
     return <div>Loading...</div>;
   }
 
-  //map the kinds to readable words
-  const wordMap = {
-    6: "Intensité",
-    1: "Cardio",
-    5: "Vitesse",
-    4: "Force",
-    3: "Endurance",
-    2: "Energie",
-  };
-
-  //transform the data to include the readable kind names
-  const transformedData = userData.data.map((item) => ({
-    ...item,
-    kind: wordMap[item.kind.toString()],
-  }));
-
-  //define the order of the kinds
-  const order = [
-    "Intensité",
-    "Vitesse",
-    "Force",
-    "Endurance",
-    "Energie",
-    "Cardio",
-  ];
-  //sort the transformed data based on the defined order
-  transformedData.sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind));
-
   //return the chart component
   return (
     <div className="radialChart">
       <ResponsiveContainer className="responsive-container">
-        <RadarChart cx="50%" cy="50%" outerRadius="70%" data={transformedData}>
+        <RadarChart cx="50%" cy="50%" outerRadius="70%" data={userData}>
           <PolarGrid radialLines={false} />
           <PolarAngleAxis
             dataKey="kind"
