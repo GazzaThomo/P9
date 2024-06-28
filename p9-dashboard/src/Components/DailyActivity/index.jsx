@@ -92,8 +92,8 @@ const UserActivityChart = ({ userId, isMockData }) => {
   }
 
   //create 2 variables for the min and max on graph axis
-  const minKilogram = Math.min(...sessions.map((session) => session.kilogram));
-  const maxKilogram = Math.max(...sessions.map((session) => session.kilogram));
+  // const minKilogram = Math.min(...sessions.map((session) => session.kilogram));
+  // const maxKilogram = Math.max(...sessions.map((session) => session.kilogram));
 
   //return the html
   //for the xaxis, don't forget to change dataKey to index or day depending on what we want
@@ -118,7 +118,8 @@ const UserActivityChart = ({ userId, isMockData }) => {
             orientation="right"
             tickLine={false}
             axisLine={false}
-            domain={[minKilogram - 1, maxKilogram + 1]}
+            // domain={[minKilogram - 1, maxKilogram + 1]}
+            domain={["dataMin - 1", "dataMax + 1"]}
           />
           <YAxis
             yAxisId="left"
