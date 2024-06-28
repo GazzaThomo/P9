@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import UserActivityChart from "../../Components/DailyActivity/index.jsx";
 import UserAverageSessionsChart from "../../Components/averageSession/index.jsx";
 import UserPerformanceChart from "../../Components/Intensity/index.jsx";
@@ -14,20 +15,22 @@ import ErrorPage from "../../Components/ErrorPage/index.jsx";
 const isMockData = import.meta.env.VITE_USE_MOCK_DATA === "true";
 // const isMockData = false;
 
-function Home({ userId }) {
+function Home() {
+  const { userId } = useParams(); //get the userId from URL parameters
+  const numericUserId = Number(userId); //convert userId to number
   const [isValidId, setIsValidId] = useState(true);
   const [loading, setLoading] = useState(true);
-  const userMainDataResponse = useFetch("mainData", userId, isMockData);
+  const userMainDataResponse = useFetch("mainData", numericUserId, isMockData);
 
   //validate the user ID and handle errors
   useEffect(() => {
-    if (userMainDataResponse === null) {
+    if (userMainDataResponse === null || userMainDataResponse === undefined) {
       setIsValidId(false);
     } else {
       setIsValidId(true);
     }
     setLoading(false);
-  }, [userId, isMockData, userMainDataResponse]);
+  }, [numericUserId, isMockData, userMainDataResponse]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -42,22 +45,25 @@ function Home({ userId }) {
     <>
       <div className="home-container">
         <div className="welcome-message">
-          <Welcome userId={userId} isMockData={isMockData} />
+          <Welcome userId={numericUserId} isMockData={isMockData} />
         </div>{" "}
         <div className="main-charts">
           {" "}
           <div className="charts-container">
-            <UserActivityChart userId={userId} isMockData={isMockData} />
+            <UserActivityChart userId={numericUserId} isMockData={isMockData} />
             <div className="small-charts-container">
               <UserAverageSessionsChart
-                userId={userId}
+                userId={numericUserId}
                 isMockData={isMockData}
               />
-              <UserPerformanceChart userId={userId} isMockData={isMockData} />
-              <UserScore userId={userId} isMockData={isMockData} />
+              <UserPerformanceChart
+                userId={numericUserId}
+                isMockData={isMockData}
+              />
+              <UserScore userId={numericUserId} isMockData={isMockData} />
             </div>
           </div>
-          <Nutrients userId={userId} isMockData={isMockData} />
+          <Nutrients userId={numericUserId} isMockData={isMockData} />
         </div>
       </div>
     </>
